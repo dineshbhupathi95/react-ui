@@ -1,13 +1,11 @@
 import React, { useEffect,useState } from 'react';
 import clsx from 'clsx';
-import TopBar from './homeComponents/headerBar/TopBar';
+import TopBar from '../components/homeComponents/headerBar/TopBar';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core'
-import MainFeaturedPost from './homeComponents/mainPageComponents/MainFeaturedPost';
-import FeaturedPost from './homeComponents/mainPageComponents/FeaturedPost';
-import Pricing from './homeComponents/mainPageComponents/Pricing'
-import Footer from './homeComponents/footerBar/Footer'
+import LoginForm from '../components/LoginForm'
+import Footer from '../components/homeComponents/footerBar/Footer'
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -56,18 +54,9 @@ export default function Home(props){
             <TopBar />
             <Container maxWidth="lg">
                 <main>
-                    {/* main feture component */}
                     <div className={classes.appBarSpacer} />
-                <MainFeaturedPost post={mainFeaturedPost} />
-                <Grid container spacing={4} id="gethelp-section">
-                    {featuredPosts.map((post) => (
-                    <FeaturedPost key={post.title} post={post} />
-                    ))}
-                </Grid>
-                <Grid container spacing={5} id="pricing-section">
+                    <LoginForm></LoginForm> 
                     <div className={classes.appBarSpacer} />
-                    <Pricing />
-                </Grid>
                 </main>
             </Container>
             <Footer />

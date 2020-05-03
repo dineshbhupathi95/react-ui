@@ -1,14 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import SignIn from './components/LoginPage';
+import SignIn from './pages/LoginPage';
 import UsersTable from './components/Contacts';
 import { BrowserRouter as Router, Route, Link, Switch,BrowserRouter } from 'react-router-dom';
 import TabsApp from './components/Tabs'
 import LandingPage from './components/Landingpage'
 import GetHelp from './components/Gethelp';
 import ContactOrgnization from './components/ContactOrg'
-import Home from './components/Home'
+import Home from './pages/Home'
 
 function App() {
   return (
