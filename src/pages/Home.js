@@ -70,6 +70,8 @@ export default function Home(props){
                 </Grid>
                 </main>
             </Container>
+            <br></br>
+            <br></br>
             <Footer />
         </div>
     )

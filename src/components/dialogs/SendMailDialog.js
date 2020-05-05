@@ -13,6 +13,9 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 
 const styles = (theme) => ({
@@ -65,16 +68,20 @@ const useStyles = makeStyles((theme) => ({
 export default function RequestDemoPopup() {
     const classes = useStyles()
   const [open, setOpen] = React.useState(false);
+  const [snackopen, setsnackOpen] = React.useState(false);
   const [values,setValues] = React.useState({
-    "first_name": null,
-    "last_name": null,
-    "email": null,
-    "company": null,
-    "phone": null,
-    "mobile": null,
-    "jobtitle": null,
-    "message": null
+    "to_address": null,
+    "subject": null,
+    "text_body": null,
   })
+
+  const handleClosesnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setsnackOpen(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -90,9 +97,10 @@ export default function RequestDemoPopup() {
   }
   const handleSubmit =e=>{
       e.preventDefault()
-      axios.post('https://djangosalesforce.herokuapp.com/requestdemo/',values).then(response=>{
+      setOpen(false);
+      axios.post('https://djangosalesforce.herokuapp.com/sendmails/',values).then(response=>{
         console.log(response,'success')
-       setOpen(false)
+        setsnackOpen(true);
       })
       .catch(error=>{
         console.log(error,'error')
@@ -102,121 +110,83 @@ export default function RequestDemoPopup() {
   return (
     <div>
       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        Request Demo
+        Send Mail
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-         Request a Demo
+       Email
         </DialogTitle>
         <DialogContent>
-     <Grid container spacing={1} direction="row">
-      <Grid item sm={5} xs={10}>
+        <Grid container spacing={1} direction="row">
+      <Grid item sm={8} xs={16}>
       <TextField
             autoFocus
-            label="Outlined" variant="outlined"
             margin="dense"
-            id="fname"
-            name="first_name"
-            label="First Name"
-            type="text"
-            required
-            onChange={handleInput}
-          />
-          </Grid>
-          <Grid item sm={5} xs={10}>
-      <TextField
-            autoFocus
-            label="Outlined" variant="outlined"
-            margin="dense"
-            id="lname"
-            name="last_name"
-            label="Last Name"
-            type="text"
-            required
-            onChange={handleInput}
-          />
-          </Grid>
-          <Grid item sm={5} xs={10}>
-      <TextField
-            autoFocus
-            label="Outlined" variant="outlined"
-            margin="dense"
-            id="email"
-            name="email"
-            label="Email"
+            id="tomail"
+            label="To Mail Here"
+            name="to_address"
             type="email"
-            required
+            fullWidth
             onChange={handleInput}
           />
           </Grid>
-          <Grid item sm={5} xs={10}>
+          <Grid item sm={8} xs={16}>
       <TextField
             autoFocus
-            label="Outlined" variant="outlined"
             margin="dense"
-            id="phone"
-            name="phone"
-            label="Phone"
-            type="number"
-            onChange={handleInput}
-          />
-          </Grid>
-          <Grid item sm={5} xs={10}>
-      <TextField
-            autoFocus
-            label="Outlined" variant="outlined"
-            margin="dense"
-            id="cname"
-            name="company"
-            label="Company Name"
+            id="subject"
+            label="Subject"
+            name="subject"
             type="text"
+            fullWidth
             onChange={handleInput}
           />
           </Grid>
-          <Grid item sm={5} xs={10}>
-      <TextField
-            autoFocus
-            label="Outlined" variant="outlined"
-            margin="dense"
-            id="jtitle"
-            name="jobtitle"
-            label="Job Title"
-            type="text"
-            onChange={handleInput}
-          />
-          </Grid>
-          <Grid item sm={10} xs={20}>
-      <TextField
-      className={classes.linput}
-            autoFocus
-             label="Outlined" variant="outlined"
-            margin="dense"
-            id="looking"
-            label="what Are You Looking For ?"
-            type="text"
-            onChange={handleInput}
-          />
-          </Grid>
-          <Grid item sm={10} xs={20}>
+          <Grid item sm={8} xs={16}>
           <TextField
-          className={classes.linput}
+           autoFocus
+           margin="dense"
+        //   className={classes.linput}
           id="outlined-multiline-static"
-          label="Your Message"
+          label="Message Body"
           multiline
-          name="message"
+          name="text_body"
           rows={4}
           variant="outlined"
           onChange={handleInput}
+        //   onChange={handleInput}
         />
           </Grid>
-    </Grid>
+          <Grid item sm={8} xs={16}>
+          <AttachFileIcon />
+          </Grid>
+          </Grid>
+ 
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="secondary" autoFocus onClick={handleSubmit}>
-            Submit
+          <Button variant="outlined" autoFocus onClick={handleSubmit} color="primary">
+            Send
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',        
+        }}
+        open={snackopen}
+        autoHideDuration={3000}
+        onClose={handleClosesnackbar}
+        message="Send success"
+        action={
+          <React.Fragment>
+            <IconButton size="small" aria-label="close" onClick={handleClosesnackbar}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+      
     </div>
   );
 }

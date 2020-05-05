@@ -76,7 +76,7 @@ export default function SignIn() {
       e.preventDefault()
       axios.post('https://djangosalesforce.herokuapp.com/login/',values).then(response=>{
         console.log(response,'success')
-        window.location.pathname='/home/'
+        window.location.pathname='/dashboard/'
       })
       .catch(error=>{
         setOpen(true);

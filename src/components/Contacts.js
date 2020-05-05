@@ -7,6 +7,7 @@ import TopAppBar from './Topbar'
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TabsApp from './Tabs'
+import SendDialog from './dialogs/SendMailDialog';
 
 const useStyles = makeStyles({
     root: {
@@ -44,7 +45,7 @@ export default function UsersTable() {
     )}
     return (
         <div>
-                   
+       <SendDialog />
         <Paper className={classes.root}>              
             <Table className={classes.table} size="medium" aria-label="simple table">
                 <TableHead>

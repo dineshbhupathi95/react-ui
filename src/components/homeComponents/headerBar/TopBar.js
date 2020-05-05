@@ -164,31 +164,31 @@ export default function TopBar(props) {
         <IconButton aria-label="show 4 new mails" color="inherit">
             <LiveHelpIcon />
         </IconButton>
-        <p>Get Help</p>
+        <p><a href="#gethelp-section" style={{textDecoration:"None",color:"black"}}>Get Help</a></p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
             <PhonelinkRingIcon />
         </IconButton>
-        <p>Contact Us</p>
+        <p><a href="#contact-section" style={{textDecoration:"None",color:"black"}}>Contact Us</a></p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
             <AttachMoneyIcon />
         </IconButton>
-        <p>Pricing</p>
+        <p><a href="#pricing-section" style={{textDecoration:"None",color:"black"}}>Pricing</a></p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
             <VpnKeyIcon />
         </IconButton>
-        <p>Login</p>
+        <p><a href="/signin/" style={{textDecoration:"None",color:"black"}}>Login</a></p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
             <PictureInPictureIcon />
         </IconButton>
-        <p>Request Demo</p>
+        <RequestDemoPopup />
       </MenuItem>
     </Menu>
   );

@@ -76,7 +76,6 @@ export default function NavTabs() {
 
   return (
     <div className={classes.root}>
-        <BackToTop />
       <AppBar className={classes.tabcs} position="static">
         <Tabs
           variant="fullWidth"

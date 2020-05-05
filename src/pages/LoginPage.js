@@ -51,7 +51,6 @@ export default function Home(props){
     }
     return(
         <div>
-            <TopBar />
             <Container maxWidth="lg">
                 <main>
                     <div className={classes.appBarSpacer} />
@@ -59,7 +58,6 @@ export default function Home(props){
                     <div className={classes.appBarSpacer} />
                 </main>
             </Container>
-            <Footer />
         </div>
     )
 }
